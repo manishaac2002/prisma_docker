@@ -1,12 +1,15 @@
+//generate prisma client
 generator client {
   provider = "prisma-client-js"
 }
 
+//database and url
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
+//creating a table
 model User {
   id         String   @id @default(uuid())
   firstName  String
