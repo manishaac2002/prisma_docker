@@ -9,14 +9,26 @@ application.use(express.json())
 
 // Get user Details
 application.get('/', async (request, response) => {
-    const allUsers = await prisma.user.findMany()
+    const allUsers = await prisma.User.findMany()
     response.json(allUsers)
 })
+application.get('/getHouse', async (request, response) => {
+    const allHouse = await prisma.house.findMany({include:{
+        owner:true,
+        bulitBy:false,
+    }})
+    response.json(allHouse)
+})
+
 
 //Add new Users
-application.post('/', async (request, response) => {
+application.post('/user', async (request, response) => {
     const newUsers = await prisma.user.create({ data: request.body })
     response.json(newUsers)
+})
+application.post('/house', async (request, response) => {
+  const newHouse = await prisma.house.create({data :request.body})
+  response.json(newHouse)
 })
 
 //Edit user details
@@ -25,7 +37,7 @@ application.put("/:id", async (request, response) => {
     const id =request.params.id
     const newAge =request.body.age
     const updateUsers = await prisma.user.update({
-        where:{id:parseInt(id)},
+        where:{id:id},
         data:{age:newAge}
     })
     response.json(updateUsers)
@@ -40,9 +52,9 @@ application.delete("/:id", async (request, response) => {
    try {
     const id =request.params.id
     const deleteUsers = await prisma.user.delete({
-        where:{id:parseInt(id)}
+        where:{id:id}
     })
-    response.json(deleteUsers).send("User deleted successfully")
+    response.json(deleteUsers)
    } catch (error) {
     console.log(error);
    }
