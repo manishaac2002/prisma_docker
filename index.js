@@ -20,7 +20,6 @@ application.get('/getHouse', async (request, response) => {
     response.json(allHouse)
 })
 
-
 //Add new Users
 application.post('/user', async (request, response) => {
     const newUsers = await prisma.user.create({ data: request.body })
@@ -45,7 +44,6 @@ application.put("/:id", async (request, response) => {
     console.log(error);
    }
 })
-
 
 // Delete user detail
 application.delete("/:id", async (request, response) => {
