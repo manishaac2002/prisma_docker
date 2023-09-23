@@ -11,7 +11,7 @@ datasource db {
 
 //creating a table
 model User { //table name
-  id         String   @id @default(uuid()) //fields
+  id         String   @id @default(uuid()) //fields in a table 
   firstName  String
   lastName   String
   age        Int
