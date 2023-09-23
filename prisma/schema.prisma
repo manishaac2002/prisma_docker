@@ -10,8 +10,8 @@ datasource db {
 }
 
 //creating a table
-model User {
-  id         String   @id @default(uuid())
+model User { //table name
+  id         String   @id @default(uuid()) //fields
   firstName  String
   lastName   String
   age        Int
